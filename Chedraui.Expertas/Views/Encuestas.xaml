@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Chedraui.Expertas.Encuestas">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Chedraui" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView Orientation="Vertical">
+                <StackLayout VerticalOptions="StartAndExpand" Padding="30,30,30,0">
+                    <Label Text="Esncuestas disponibles" Style="{StaticResource LabelTitleStyle}"></Label>
+                    <BoxView HeightRequest="1" BackgroundColor="Orange" HorizontalOptions="FillAndExpand" />
+                    <ListView x:Name="EncuestasListView" ItemsSource="{Binding Encuestas}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand="{Binding LoadItemsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" ItemSelected="OnItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="FillAndExpand">
+                                        <StackLayout Padding="10,20,0,20" VerticalOptions="Center" HorizontalOptions="Center" Orientation="Vertical" WidthRequest="250">
+                                            <Label Text="{Binding Titulo}" LineBreakMode="WordWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="14" />
+                                            <Label Text="{Binding FechaFinal, StringFormat='Vigencia {0:dd-MM-yyyy HH:mm}'}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="11" />
+                                            <Label Text="{Binding Premio, StringFormat='Reconocimiento: {0}'}" LineBreakMode="WordWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontAttributes="Bold" FontSize="11" />
+                                        </StackLayout>
+                                        <StackLayout Padding="30,5,0,0">
+                                            <Image Source="Encuesta.png" HeightRequest="30" VerticalOptions="CenterAndExpand" HorizontalOptions="End" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button Text="Finalizar sesión" BorderRadius="20" Style="{StaticResource ButtonOrange}">
+                        <Button.FontSize>
+                            <OnPlatform x:TypeArguments="x:Double" iOS="16" Android="14" />
+                        </Button.FontSize>
+                    </Button>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
